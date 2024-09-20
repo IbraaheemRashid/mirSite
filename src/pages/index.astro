@@ -3,86 +3,120 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 ---
 
-<!-- TODO
- ADD STYLING AND MAKE THIS LOOK BETTER-->
 <Layout title="MIR">
+	<header>
+		<div class="contact-list">
+			<a href="https://github.com/IbraaheemRashid">github</a>
+			<a href="https://www.linkedin.com/in/ibraaheem-rashid-09a81723a/">linkedin</a>
+			<a href="mailto:ibraaheemrashid@hotmail.com">email</a>
+		</div>
+	</header>
 	<main>
-		<div style="display: flex; justify-content: flex-start; gap: 1rem;">
-			<p><a href="https://github.com/IbraaheemRashid">github</a></p>
-			<p><a href="https://www.linkedin.com/in/ibraaheem-rashid-09a81723a/">linkedin</a></p>
-			<p><a href="mailto:ibraaheemrashid@hotmail.com">email</a></p>
+		<div class="title-section">
+			<h1 class="font-bold">MIRASHID</h1>
+			<p class="subtitle">a place for my stuff</p>
 		</div>
-		<div>
-			<h3>mirashid</h3>
-			<p>a place for my thoughts</p>
-		</div>
-		<div>
-			<h4>projects</h4>
-			<p><a href = "https://github.com/IbraaheemRashid/EducationalChatbot">EDUBOT</a></p>
-			<p>a way for you to speak to your documents.</p>
-		</div>
-		<div>
-			<h4>essays</h4>
-			<p><a href = "">TEST</a></p>
+		
+		<div class="content">
+			<h2>projects</h2>
+			<ul>
+				<li>
+					<a href="https://github.com/IbraaheemRashid/EducationalChatbot">EDUBOT</a>
+					<span class="description">- a way for you to speak to your documents.</span>
+				</li>
+			</ul>
+
+			<h2>essays</h2>
+			<ul>
+				<li><a href="">TEST</a></li>
+			</ul>
 		</div>
 	</main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
+	:root {
+		--text-color: #C6D0F5;
+		--bg-color: #303446;
+		--link-color: #8CAAEE;
+		--link-hover-color: #B5BFE2;
+		--link-visited-color: #F4B8E4;
+		--description-color: #838BA7;
+		--header-bg-color: #292C3C;
+	}
+
+	body {
+		font-family: monospace;
+		background-color: var(--bg-color);
+		color: var(--text-color);
 		line-height: 1.6;
-	}
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
-	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		margin: 0;
 		padding: 0;
+	}
+
+	header {
+		background-color: var(--header-bg-color);
+		padding: 0.5rem;
+		text-align: left;
+	}
+
+	.contact-list {
+		display: flex;
+		gap: 1rem;
+	}
+
+	main {
+		max-width: 800px;
+		margin: 2rem auto;
+		padding: 0 1rem;
+		flex-grow: 1;
+	}
+
+	.title-section {
+		margin-bottom: 2rem;
+	}
+
+	h1 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.subtitle {
+		color: var(--description-color);
+	}
+
+	h2 {
+		font-size: 1.2rem;
+		margin-top: 2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	li {
+		margin-bottom: 0.5rem;
+	}
+
+	a {
+		color: var(--link-color);
+		text-decoration: underline;
+	}
+
+	a:hover {
+		color: var(--link-hover-color);
+	}
+
+	a:visited {
+		color: var(--link-visited-color);
+	}
+
+	.description {
+		color: var(--description-color);
 	}
 </style>
