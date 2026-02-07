@@ -1,6 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Layout title="MIR">
@@ -13,10 +16,10 @@ import Card from '../components/Card.astro';
 	</header>
 	<main>
 		<div class="title-section">
-			<h1 class="font-bold">MIRASHID</h1>
+			<h1>MIR</h1>
 			<p class="subtitle">a place for my stuff</p>
 		</div>
-		
+
 		<div class="content">
 			<h2>projects</h2>
 			<ul>
@@ -28,7 +31,12 @@ import Card from '../components/Card.astro';
 
 			<h2>essays</h2>
 			<ul>
-				<li><a href="">TEST</a></li>
+				{essays.map((essay) => (
+					<li>
+						<a href={`/essays/${essay.slug}`}>{essay.data.title}</a>
+						<span class="description">- {essay.data.description}</span>
+					</li>
+				))}
 			</ul>
 		</div>
 	</main>
@@ -40,13 +48,13 @@ import Card from '../components/Card.astro';
 		--bg-color: #303446;
 		--link-color: #8CAAEE;
 		--link-hover-color: #B5BFE2;
-		--link-visited-color: #F4B8E4;
 		--description-color: #838BA7;
 		--header-bg-color: #292C3C;
 	}
 
 	body {
 		font-family: monospace;
+		font-size: 1.1rem;
 		background-color: var(--bg-color);
 		color: var(--text-color);
 		line-height: 1.6;
@@ -59,7 +67,7 @@ import Card from '../components/Card.astro';
 
 	header {
 		background-color: var(--header-bg-color);
-		padding: 0.5rem;
+		padding: 0.75rem 1rem;
 		text-align: left;
 	}
 
@@ -80,7 +88,8 @@ import Card from '../components/Card.astro';
 	}
 
 	h1 {
-		font-size: 1.5rem;
+		font-size: 2rem;
+		font-weight: bold;
 		margin-bottom: 0.5rem;
 	}
 
@@ -89,7 +98,7 @@ import Card from '../components/Card.astro';
 	}
 
 	h2 {
-		font-size: 1.2rem;
+		font-size: 1.4rem;
 		margin-top: 2rem;
 		margin-bottom: 0.5rem;
 	}
@@ -110,10 +119,6 @@ import Card from '../components/Card.astro';
 
 	a:hover {
 		color: var(--link-hover-color);
-	}
-
-	a:visited {
-		color: var(--link-visited-color);
 	}
 
 	.description {

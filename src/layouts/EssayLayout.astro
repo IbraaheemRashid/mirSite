@@ -1,0 +1,150 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+}
+
+const { title, date } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={title}>
+  <header>
+    <div class="contact-list">
+      <a href="/">← back</a>
+    </div>
+  </header>
+  <main>
+    <article>
+      <header class="essay-header">
+        <h1>{title}</h1>
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+      </header>
+      <div class="essay-content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --text-color: #C6D0F5;
+    --bg-color: #303446;
+    --link-color: #8CAAEE;
+    --link-hover-color: #B5BFE2;
+    --description-color: #838BA7;
+    --header-bg-color: #292C3C;
+  }
+
+  body {
+    font-family: monospace;
+    font-size: 1.1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: var(--header-bg-color);
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  .contact-list {
+    display: flex;
+    gap: 1rem;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    flex-grow: 1;
+  }
+
+  .essay-header {
+    margin-bottom: 2rem;
+    background: transparent;
+    padding: 0;
+  }
+
+  .essay-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .essay-header time {
+    color: var(--description-color);
+  }
+
+  .essay-content {
+    line-height: 1.8;
+  }
+
+  .essay-content :global(h2) {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .essay-content :global(h3) {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .essay-content :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .essay-content :global(a) {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+
+  .essay-content :global(a:hover) {
+    color: var(--link-hover-color);
+  }
+
+  .essay-content :global(code) {
+    background-color: var(--header-bg-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .essay-content :global(pre) {
+    background-color: var(--header-bg-color);
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .essay-content :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  a {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: var(--link-hover-color);
+  }
+</style>
